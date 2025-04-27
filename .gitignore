@@ -1,2 +1,4 @@
 # This file is used to ignore files that should not be tracked by Git.
 lazy-lock.json
+lua/plugins/lspconfig.lua
+
