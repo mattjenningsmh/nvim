@@ -4,7 +4,9 @@ local notify = vim.notify
 local opt = { noremap = true, silent = true }
 
 -- general mappings
-map("n", "<leader>e", ":20Lex<CR>", { desc = "Open file explorer" })
+
+-- map("n", "<leader>e", ":20Lex<CR>", { desc = "Open file explorer" })
+map("n", "<leader>e", ":RangerVSplit<CR>", { desc = "Open file explorer" })
 map("n", "<Tab>", ":tabnext<CR>", { desc = "Next tab" })
 map("n", "<S-Tab>", ":tabNext<CR>", { desc = "Previous tab", noremap = true })
 map('n', '<C-`>', ':bel 15split | term<CR>', { noremap = true, silent = true })
@@ -25,6 +27,12 @@ map('n', 'p', '"+p', { noremap = true })
 map('n', 'dd', '"+dd', { noremap = true, desc = "Delete line and copy to system clipboard" })
 map('v', 'x', '"+x', { noremap = true })
 
+-- set vim directory to current buffer's directory 
+map('n', '<leader>cd', function()
+    local current_dir = vim.fn.expand('%:p:h')
+    vim.cmd('lcd ' .. current_dir)
+    notify("Changed working directory to: " .. current_dir)
+end, { noremap = true, desc = "Change working directory to current buffer's directory" })
 
 -- Visual mode mappings
 map('v', '(', 'xi()<Esc>hp', opt)
