@@ -17,7 +17,7 @@ return{
                     if ok and stats and stats.size > max_filesize then
                         return true
                     end
-                    return lang == "c" or lang == "rust"
+                    return lang == "rust"
                 end,
                 additional_vim_regex_highlighting = false,
             },

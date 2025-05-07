@@ -31,10 +31,11 @@ return {
                 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)         -- Show diagnostics
                 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)                 -- Go to previous diagnostic
                 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)                 -- Go to next diagnostic
-                vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)         -- Diagnostics to loclist
+                vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist,
+                    { desc = "open disagnostics list", buffer = bufnr })                  -- Diagnostics to loclist
                 vim.keymap.set("n", "<leader>F", function()
                     vim.lsp.buf.format({ async = true })                                  -- Format buffer
-                end, opts)
+                end, { desc = "format code", buffer = bufnr })
             end
 
             -- Add LSP server setups
@@ -67,7 +68,6 @@ return {
             local root_dir = util.root_pattern("src")(vim.fn.expand("%:p")) or vim.fn.getcwd()
             local workspace_dir =
                 vim.fn.stdpath("data") .. "/mason/share/jdtls/workspace/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
-            local java_executable = "/usr/lib/jvm/openjdk-24/bin/java" -- Modify this path as needed
             -- Java (jdtls)
             require("lspconfig").jdtls.setup({
                 on_attach = on_attach,
@@ -97,6 +97,10 @@ return {
             require("lspconfig").clangd.setup({
                 on_attach = on_attach,
                 capabilities = capabilities,
+                cmd = {
+                    "clangd",
+                    "--fallback-style=Google",
+                }
             })
 
 

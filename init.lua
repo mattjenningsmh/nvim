@@ -7,7 +7,7 @@ require("config.lazy")
 
 
 vim.cmd [[
-    set mouse=
+ set mouse=
     set smartcase
     set hlsearch
     set ignorecase
@@ -18,11 +18,8 @@ vim.cmd [[
     set autoindent
     set nowrap
     set rnu
+    set nonu
     set ruler
-    set foldmethod=syntax
-    
-
-
     "colorscheme desert
 
     "highlight Normal guibg=272822
@@ -44,6 +41,23 @@ vim.cmd [[
     " Autocommand to execute :Lex when Vim starts
     " autocmd VimEnter * :20Lex
 ]]
+
+if vim.g.neovide then
+    vim.g.neovide_cursor_trail_size = 0.1
+    vim.g.neovide_cursor_short_animation_length = 0.04
+    vim.g.neovide_cursor_animation_length = 0.150
+    vim.g.neovide_scale_factor = 1.0
+    local change_scale_factor = function(delta)
+      vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+    end
+    vim.keymap.set("n", "<C-+>", function()
+      change_scale_factor(1.25)
+    end)
+    vim.keymap.set("n", "<C-->", function()
+      change_scale_factor(1/1.25)
+    end)
+end
+
 
 vim.opt.foldmethod = "indent"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
