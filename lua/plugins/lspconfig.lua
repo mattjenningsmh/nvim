@@ -68,6 +68,11 @@ return {
             local root_dir = util.root_pattern("src")(vim.fn.expand("%:p")) or vim.fn.getcwd()
             local workspace_dir =
                 vim.fn.stdpath("data") .. "/mason/share/jdtls/workspace/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
+<<<<<<< HEAD
+=======
+            local java_executable =
+            "/Library/Java/JavaVirtualMachines/openjdk-21.jdk/contents/Home/bin/java"                         -- Modify this path as needed
+>>>>>>> a99b102 (stashing these)
             -- Java (jdtls)
             require("lspconfig").jdtls.setup({
                 on_attach = on_attach,
