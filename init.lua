@@ -1,10 +1,11 @@
+---@diagnostic disable: lowercase-global
+vim = vim
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-
 require("keymaps")
 require("config.lazy")
-
 
 vim.cmd [[
  set mouse=
@@ -48,16 +49,15 @@ if vim.g.neovide then
     vim.g.neovide_cursor_animation_length = 0.150
     vim.g.neovide_scale_factor = 1.0
     local change_scale_factor = function(delta)
-      vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+        vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
     end
     vim.keymap.set("n", "<C-+>", function()
-      change_scale_factor(1.25)
+        change_scale_factor(1.25)
     end)
     vim.keymap.set("n", "<C-->", function()
-      change_scale_factor(1/1.25)
+        change_scale_factor(1 / 1.25)
     end)
 end
-
 
 vim.opt.foldmethod = "indent"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

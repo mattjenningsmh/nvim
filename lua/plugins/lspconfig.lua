@@ -9,13 +9,12 @@ return {
         },
         config = function()
             require("mason").setup()           -- Setup Mason
-            require("mason-lspconfig").setup() -- Bridge between Mason and LSPConfig
 
             -- Add LSP server configurations
             local lspconfig = require("lspconfig")
 
             -- Define a global on_attach function for keybindings
-            local on_attach = function(client, bufnr)
+            local on_attach = function(_, bufnr)
                 -- Keybinding options
                 local opts = { buffer = bufnr, silent = true }
 
@@ -45,7 +44,7 @@ return {
             lspconfig.lua_ls.setup({
                 on_attach = on_attach, -- Attach keybindings
                 capabilities = capabilities,
-                root_dir = vim.fn.getcwd(),
+                root_dir = ".",
                 settings = {
                     Lua = {
                         diagnostics = { globals = { "vim" } },
@@ -77,9 +76,10 @@ return {
             require("lspconfig").jdtls.setup({
                 on_attach = on_attach,
                 capabilities = capabilities,
-                root_dir = function(fname)
-                    return util.root_pattern("src")(fname)
-                        or vim.fn.getcwd()
+                root_dir = function(_)
+                    --return util.root_pattern("src")(fname)
+                    --    or vim.fn.getcwd()
+                    return root_dir
                 end,
                 cmd = {
                     "java",
