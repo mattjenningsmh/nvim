@@ -63,3 +63,13 @@ vim.opt.foldmethod = "indent"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = true
 vim.opt.foldlevel = 1
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact", "html", "css" },
+  callback = function()
+    vim.bo.tabstop = 2        -- Number of spaces that a <Tab> counts for
+    vim.bo.shiftwidth = 2     -- Number of spaces used for each step of (auto)indent
+    vim.bo.softtabstop = 2    -- How many spaces a Tab feels like when editing
+    vim.bo.expandtab = true   -- Use spaces instead of tabs
+  end,
+})
